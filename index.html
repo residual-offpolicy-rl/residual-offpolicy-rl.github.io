@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Residual Off-Policy RL for Finetuning Behavior Cloning Policies - ICRA 2026.">
+  <meta name="keywords" content="Reinforcement Learning, Robot Learning, BC and RL">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Residual Off-Policy RL for Finetuning Behavior Cloning Policies</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/151621-chef-vector-hat-png-image-high-quality-2642634052.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" href="https://ankile.com" target="_blank">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+        </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More Research
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://imitation-juicer.github.io" target="_blank">
+              JUICER
+            </a>
+            <a class="navbar-item" href="https://diffusion-ppo.github.io/" target="_blank">
+              DPPO
+            </a>
+            <a class="navbar-item" href="https://dexhub.ai/project" target="_blank">
+              Dexhub
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              Residual Off-Policy RL for Finetuning Behavior Cloning Policies
+            </h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://ankile.com" target="_blank">Lars Ankile</a><sup>1,2,3</sup>,</span>
+              <span class="author-block">
+                <a href="https://anthonysimeonov.github.io/" target="_blank">Anthony Simeonov</a><sup>1,2</sup>,</span>
+              <span class="author-block">
+                <a href="https://idanshen.github.io/" target="_blank">Idan Shenfeld</a><sup>1,2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://marceltorne.github.io/" target="_blank">Marcel Torne</a><sup>1,2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a><sup>1,2</sup>,
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Massachusetts Institute of Technology</span>
+              <span class="author-block"><sup>2</sup>Improbable AI Lab</span>
+              <span class="author-block"><sup>3</sup>Harvard University</span>
+            </div>
+
+            <div class="image-container">
+              <img src="./static/images/MIT_logo.png" alt="MIT Logo" width="12%" style="margin: 1em 0;">
+              <img src="./static/images/Shield_CMYK.png" alt="Harvard Logo" width="7%" style="margin: 1em 0;">
+              <img src="./static/images/iai-logo-ver_1.jpg" alt="Improbable AI Logo" width="10%" style="margin: 1em 0;">
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a target="_blank" href="/static/pdf/_ICRA26__Residual_Off_Policy_RL.pdf"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <!-- <span class="link-block">
+                  <a target="_blank" href="https://youtu.be/AsasJJ2jlw8"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>3-Minute Video</span>
+                  </a>
+                </span> -->
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a target="_blank" href="https://github.com/ankile/robust-rearrangement"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- Dataset Link. -->
+                <span class="link-block">
+                  <a href="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/index.html"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="far fa-images"></i>
+                    </span>
+                    <span>Data</span>
+                  </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <video id="teaser" autoplay muted loop playsinline height="100%">
+          <!-- <source src="./static/videos/IROS_short.mp4" type="video/mp4"> -->
+          <source src="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/videos/website/1_main_video.m4v"
+            type="video/mp4">
+        </video>
+        <h2 class="subtitle has-text-centered">
+          We present novel residual off-policy reinforcement learning methods that significantly improve sample
+          efficiency
+          and performance across various domains.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            Recent advances in behavior cloning (BC) have enabled impressive visuomotor control policies. However, these
+            approaches are limited by the quality of human demonstrations, the manual effort required for data
+            collection, and the diminishing returns from increasing data.
+          </div>
+          <div class="content has-text-justified">
+            In comparison, reinforcement learning (RL) trains an agent through autonomous interaction with the
+            environment and has shown remarkable success in various domains. Still, training RL policies directly on
+            real-world robots remains challenging due to sample inefficiency, safety concerns, and the difficulty of
+            learning from sparse rewards for long-horizon tasks, especially for high-degree-of-freedom (DoF) systems.
+          </div>
+          <div class="content has-text-justified">
+            We present a recipe that combines the benefits of BC and RL through a residual learning framework. Our
+            approach leverages BC policies as black-box bases and learns lightweight per-step residual corrections via
+            efficient off-policy RL.
+          </div>
+          <div class="content has-text-justified">
+            We show that our method requires only sparse binary reward signals and can effectively learn manipulation
+            tasks on high-DoF systems in both simulation and the real world. In particular, we demonstrate, to the best
+            of our knowledge, the first successful real-world RL training on a humanoid robot with dexterous hands.
+          </div>
+          <div class="content has-text-justified">
+            Our results show state-of-the-art performance in various vision-based tasks, establishing a practical
+            pathway to deploy RL in the real world.
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+      <!-- Paper video. -->
+      <!-- <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Video</h2>
+          <div class="publication-video">
+            <iframe src="https://www.youtube.com/watch?v=AsasJJ2jlw8" frameborder="0" allow="autoplay; encrypted-media"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div> -->
+      <!--/ Paper video. -->
+    </div>
+  </section>
+
+
+  <!-- Summary -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">The key insight</h2>
+
+      <div class="content has-text-justified">
+        <p>
+          Traditional off-policy reinforcement learning algorithms often struggle with sample efficiency and stability
+          when learning from experience replay buffers.
+        </p>
+        <p>
+          Our residual approach leverages the power of residual learning to correct and improve upon existing policies,
+          leading to more stable and efficient learning across diverse environments.
+        </p>
+      </div>
+
+      <video autoplay muted loop playsinline height="100%">
+        <source src="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/videos/website/2_scaling_plots.m4v"
+          type="video/mp4">
+      </video>
+
+      <br><br><br>
+
+
+      <h2 class="title is-3">Introducing Residual Off-Policy RL</h2>
+
+      <div class="content has-text-justified">
+        <p>
+          Our method introduces residual learning principles to off-policy reinforcement learning, enabling more stable
+          and efficient learning from experience replay buffers.
+        </p>
+        <p>
+          The approach learns residual corrections to existing policies, allowing for incremental improvements while
+          maintaining the benefits of off-policy learning and sample efficiency.
+        </p>
+      </div>
+
+      <div class="content has-text-centered is-full-width">
+        <img src="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/videos/website/3_residual_schematic.png"
+          alt="" style="width: 100%;">
+      </div>
+
+      <br><br><br>
+
+      <h2 class="title is-3">Residual learning leads to significant performance improvements</h2>
+
+      <div class="content has-text-justified">
+        <p>
+          Our residual off-policy approach demonstrates substantial improvements in sample efficiency and final
+          performance
+          compared to standard off-policy algorithms across a variety of challenging environments.
+        </p>
+      </div>
+
+      <video autoplay muted loop playsinline height="100%">
+        <source src="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/videos/website/4_result_bar_chart.m4v"
+          type="video/mp4">
+      </video>
+
+
+
+      <br><br><br>
+
+      <h2 class="title is-3">Excellent performance on challenging tasks</h2>
+
+      <div class="content has-text-justified">
+        <p>
+          Our residual off-policy method excels on complex tasks that require both exploration and exploitation.
+          The residual learning approach provides the stability needed for consistent performance across diverse
+          environments.
+        </p>
+      </div>
+
+      <video autoplay muted loop playsinline height="100%">
+        <source
+          src="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/videos/website/5_peg_hole_side_by_side.m4v"
+          type="video/mp4">
+      </video>
+
+
+
+      <br><br><br>
+
+      <h2 class="title is-3">What does the residual learn?</h2>
+
+      <div class="content has-text-justified">
+        <p>
+          The residual component learns to make incremental improvements to the base policy:
+
+        <ul>
+          <li>Corrects for distribution shift in off-policy learning</li>
+          <li>Improves sample efficiency through residual updates</li>
+          <li>Enables stable learning from experience replay</li>
+          <li>Provides better exploration-exploitation balance</li>
+        </ul>
+        </p>
+      </div>
+
+      <!-- make centered div-->
+      <div class="content has-text-centered is-full-width">
+
+
+        <video autoplay muted loop playsinline width="80%">
+          <source
+            src="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/videos/website/6_residual_see_through.m4v"
+            type="video/mp4">
+        </video>
+      </div>
+
+
+
+      <br><br><br>
+
+
+      <h2 class="title is-3">Real-World Policies with Sim-to-Real</h2>
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <div class="content has-text-justified is-full-width">
+            <p>Finally, we demonstrate successful sim-to-real transfer by:
+            </p>
+            <ul>
+              <li>Distilling to vision-based policies</li>
+              <li>Co-training with real demos</li>
+              <li>Using domain randomization</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Start One Leg White -->
+      <h3 class="title is-4">Improved assembly on in-distribution task</h3>
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h3 class="title is-5">Real demos only</h3>
+          <div class="content has-text-centered is-full-width">
+            <video id="teaser" autoplay muted loop playsinline height="100%">
+              <source
+                src="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/videos/website/real/3_40_real.mp4"
+                type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column is-full-width">
+          <h3 class="title is-5">Real demos + ResiP distillation</h3>
+          <div class="content has-text-centered is-full-width">
+            <video id="teaser" autoplay muted loop playsinline height="100%">
+              <source
+                src="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/videos/website/real/3_40_real_350_sim.mp4"
+                type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <!-- End One Leg White -->
+
+      <br>
+
+      <!-- Start Lamp -->
+      <h3 class="title is-4">Pipeline is task-agnostic</h3>
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h3 class="title is-5">Real demos + ResiP distillation</h3>
+          <div class="content has-text-centered is-full-width">
+            <video autoplay muted loop playsinline height="100%">
+              <source
+                src="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/videos/website/real/7_lamp_40_real_400_sim_1x_1.mp4"
+                type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column is-full-width">
+          <h3 class="title is-5">Real demos + ResiP distillation</h3>
+          <div class="content has-text-centered is-full-width">
+            <video id="teaser" autoplay muted loop playsinline height="100%">
+              <source
+                src="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/videos/website/real/7_lamp_40_real_400_sim_1x_2.mp4"
+                type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <!-- End Lamp -->
+
+      <br>
+
+      <!-- Start One Leg Black -->
+      <h3 class="title is-4">Simulation allows for assembly of unseen parts</h3>
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h3 class="title is-5">Real demos only</h3>
+          <div class="content has-text-centered is-full-width">
+            <video autoplay muted loop playsinline height="100%">
+              <source
+                src="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/videos/website/real/5_black_40_real_explanation.mp4"
+                type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column is-full-width">
+          <h3 class="title is-5">Real demos + ResiP distillation</h3>
+          <div class="content has-text-centered is-full-width">
+            <video autoplay muted loop playsinline height="100%">
+              <source
+                src="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/videos/website/real/6_black_40_real_400_sim.mp4"
+                type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <!-- End One Leg Blacks -->
+
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Sim demos</h2>
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <div class="content has-text-justified is-full-width">
+            <p>To fully appreciate the difference between imitation only and with the reactive controller learned with
+              RL,
+              please enjoy ~3-7 hours of rollouts per task at 4x speed below. This is 1000 consecutive rollouts for the
+              different policies without any editiing or cherry-picking.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Start One Leg sim -->
+      <h3 class="title is-4">1,000 uncut rollouts for <code>one_leg</code> with <code>low</code> randomness</h3>
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h3 class="title is-5">BC from 50 human demonstrations</h3>
+          <div class="content has-text-centered is-full-width">
+            <video id="teaser" autoplay muted loop playsinline height="100%">
+              <source
+                src="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/videos/uncut_rollouts/one_leg_low/uncut_1k_bc.mp4"
+                type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column is-full-width">
+          <h3 class="title is-5">BC fine-tuned with residual</h3>
+          <div class="content has-text-centered is-full-width">
+            <video id="teaser" autoplay muted loop playsinline height="100%">
+              <source
+                src="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/videos/uncut_rollouts/one_leg_low/uncut_1k_rppo.mp4"
+                type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <!-- End One Leg sim -->
+
+      <!-- Start Round Table med -->
+      <h3 class="title is-4">1,000 uncut rollouts for <code>round_table</code> with <code>med</code> randomness</h3>
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h3 class="title is-5">BC from 50 human demonstrations</h3>
+          <div class="content has-text-centered is-full-width">
+            <video id="teaser" autoplay muted loop playsinline height="100%">
+              <source
+                src="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/videos/uncut_rollouts/round_table_med/uncut_1k_rt_med_bc.mp4"
+                type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column is-full-width">
+          <h3 class="title is-5">BC fine-tuned with residual</h3>
+          <div class="content has-text-centered is-full-width">
+            <video id="teaser" autoplay muted loop playsinline height="100%">
+              <source
+                src="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/videos/uncut_rollouts/round_table_med/uncut_1k_rt_med_rppo.mp4"
+                type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <!-- End Round Table med -->
+    </div>
+  </section>
+
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Methods</h2>
+
+          <h3 class="title is-4">System Overview</h3>
+
+          <div class="content has-text-justified">
+            <p>We present a novel approach to off-policy reinforcement learning that leverages residual learning
+              principles
+              to improve sample efficiency and stability. The method combines traditional off-policy algorithms with
+              residual corrections to address common challenges in experience replay-based learning.</p>
+
+            <p>The approach involves learning a residual component that corrects and improves upon a base policy,
+              enabling more stable learning from off-policy data while maintaining the sample efficiency benefits
+              of experience replay.</p>
+
+            <p>This method addresses key challenges in off-policy RL, including distribution shift, sample efficiency,
+              and stability of learning from experience replay buffers.</p>
+          </div>
+          <div class="content has-text-centered is-full-width">
+            <img src="./static/images/framework_overview.svg" alt="" style="width: 100%;">
+          </div>
+
+          <p>
+            <i>Fig. 1:</i>
+            <strong>(1)</strong> Starting with a base policy learned through standard off-policy RL,
+            <strong>(2)</strong> we train a residual component to correct and improve the base policy.
+            <strong>(3)</strong> The residual learning approach enables more stable learning from experience replay.
+            <strong>(4)</strong> The combined policy demonstrates improved sample efficiency and performance
+            <strong>(5)</strong> across diverse environments and tasks.
+          </p>
+
+          <!-- Add some vertical space -->
+          <br>
+
+
+          <h3 class="title is-4">Residual Off-Policy Learning</h3>
+
+          <div class="content has-text-justified">
+            <p>
+              Traditional off-policy reinforcement learning algorithms often suffer from distribution shift and
+              instability
+              when learning from experience replay buffers. Our approach addresses these challenges through residual
+              learning.
+            </p>
+            <p>
+              The method learns residual corrections to improve upon a base policy:
+            </p>
+            <ul>
+              <li><strong>Base Policy:</strong> Learned through standard off-policy RL algorithms.</li>
+              <li><strong>Residual Component:</strong> Learns corrections to improve the base policy, trained with
+                residual learning objectives.</li>
+            </ul>
+
+
+            <p>This approach combines the sample efficiency of off-policy learning with the stability of residual
+              corrections, enabling more robust learning from experience replay.</p>
+          </div>
+          <div class="content has-text-centered is-full-width">
+            <img src="./static/images/ResidualDiffusionDiagram.svg" alt="" style="width: 40%;">
+          </div>
+
+          <p>
+            <i>Fig. 2:</i> Residual learning approach for off-policy reinforcement learning, where a residual component
+            learns to correct and improve upon a base policy learned from experience replay.
+          </p>
+
+          <br><br>
+
+          <h3 class="title is-4">The residual model learns policy corrections</h3>
+          <p>The residual component learns to make incremental improvements to the base policy by correcting for
+            distribution shift and improving sample efficiency. The residual learning approach enables more stable
+            learning from off-policy data while maintaining the benefits of experience replay.</p>
+          <br>
+          <div class="columns is-centered">
+            <div class="column is-full-width">
+              <h3 class="title is-5">Corrections during insertion</h3>
+              <div class="content has-text-centered is-full-width">
+                <video autoplay muted loop playsinline height="100%">
+                  <source src="https://robust-rearrangement-videos.s3.amazonaws.com/place_seq3.mp4" type="video/mp4">
+                </video>
+                <p>The peg comes down a bit to the right of the hole, and the base policy tries pushing the peg down,
+                  while the residual corrects the position so the insertion is successful.</p>
+              </div>
+            </div>
+            <div class="column is-full-width">
+              <h3 class="title is-5">Corrections during grasping</h3>
+              <div class="content has-text-centered is-full-width">
+                <video autoplay muted loop playsinline height="100%">
+                  <source src="https://robust-rearrangement-videos.s3.amazonaws.com/grasp_seq3.mp4" type="video/mp4">
+                </video>
+                <p>The base policy tries to go down with the peg too deep in the gripper, which would probably have
+                  caused a colision between the right finger and the other peg. The residual pushes the gripper back so
+                  that it can get the peg between the fingers without collision.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Results</h2>
+
+          <h3 class="title is-4">Comparing RL to BC and baselines</h3>
+
+          <div class="content has-text-justified">
+            <p>Table 1 demonstrates the effectiveness of different approaches in robotic assembly tasks. Key findings
+              include:</p>
+
+            <ul>
+              <li>Basic MLPs without action chunking (MLP-S) fail completely across all tasks.</li>
+              <li>Diffusion Policies (DP) generally outperform MLPs with chunking (MLP-C) in imitation learning.</li>
+              <li>ResiP shows significant improvements over both imitation learning baselines and alternative RL
+                fine-tuning methods, particularly in tasks with lower initial randomization.</li>
+            </ul>
+          </div>
+          <div class="content has-text-centered is-full-width">
+            <img src="./static/images/main_results.png" alt="" style="width: 100%;">
+          </div>
+          <p>
+            <i>Tab. 1:</i> <strong>Top</strong> BC-trained MLPs without chunking (MLP-S) cannot perform any of the
+            tasks, and Diffusion Policies (DP) generally outperform MLPs with chunking (MLP-C). <strong>Bottom</strong>
+            Training our proposed residual policies with RL on top of frozen diffusion policies performs the best among
+            all evaluated fine-tuning techniques.
+          </p>
+
+          <!-- Add some vertical space -->
+          <br><br>
+
+          <h3 class="title is-4">Distilling from an RL expert improves performance</h3>
+
+          <div class="content has-text-justified">
+            <p>These experiments investigate the effectiveness of distilling a reinforcement learning (RL) policy
+              trained in simulation into a vision-based policy for real-world deployment. The study focuses on how the
+              quantity and quality of synthetic RL data impact the performance of the distilled policies. The
+              experiments compare policies trained directly on human demonstrations with those distilled from RL agents,
+              and explore the effects of dataset size and modality (state-based vs. image-based) on distillation
+              performance.</p>
+
+            <p>Key Findings:</p>
+
+            <ul>
+              <li>Distilling trajectories from the RL agent (73% success rate) outperforms training directly on human
+                demonstrations (50% success rate).</li>
+              <li>A performance gap exists between the RL-trained teacher (95%) and the distilled student policy (73%).
+              </li>
+              <li>The change in modality (state-based to image-based) is not the primary cause of this performance gap.
+              </li>
+              <li>Increasing the distillation dataset size improves performance, but a gap persists even with large
+                datasets (77% success rate with 10k trajectories vs. 95% for the teacher).</li>
+              <li>The ability to generate large-scale synthetic datasets in simulation provides a significant advantage
+                for improving distilled policy performance.</li>
+            </ul>
+          </div>
+          <div class="content has-text-centered is-full-width image-container">
+            <div>
+              <img src="./static/images/distillation.svg" alt="" width="50%">
+              <p><i>Fig. 4:</i> Comparison of distilled performance from BC and RL-based teacher.</p>
+            </div>
+            <div>
+              <img src="./static/images/scaling.svg" alt="">
+              <p><i>Fig. 5:</i> BC distillation scaling with dataset size.</p>
+            </div>
+          </div>
+          <!-- Add some vertical space -->
+          <br><br>
+
+          <h3 class="title is-4">Simulation data improves performance in the real-world</h3>
+
+          <div class="content has-text-justified">
+            <p>These experiments evaluate the performance of sim-to-real policies on the physical robot. The study
+              compares policies trained on a mixture of real-world demonstrations and simulation data against those
+              trained solely on real-world demonstrations. The quantitative experiments focus on the "one leg" task.</p>
+
+            <p>
+              Key Findings:
+            </p>
+
+            <ul>
+              <li>Incorporating simulation data significantly improves real-world performance, increasing task
+                completion rates from 20-30% to 50-60%.</li>
+              <li>Policies co-trained with simulation data exhibit smoother behavior and make fewer erratic movements.
+              </li>
+              <li>Performance improvements are observed across various subtasks (corner alignment, grasping, insertion,
+                and screwing).</li>
+              <li>The combination of 40 real demonstrations and 350 simulated trajectories yields the best results, with
+                up to 60% task completion rate.</li>
+              <li>Co-trained policies show improved generalization to both part pose and obstacle pose randomizations.
+              </li>
+            </ul>
+
+            <p>These results demonstrate the effectiveness of combining real-world demonstrations with simulation data
+              for improving the performance and robustness of robotic assembly policies in real-world settings.</p>
+          </div>
+          <div class="content has-text-centered is-full-width">
+            <img src="./static/images/real_results_table.svg" alt="" style="width: 100%;">
+          </div>
+          <p><i>Tab. 2:</i> We compare the impact of combining real-world demonstrations with simulation trajectories
+            obtained by rolling our RL-trained residual policies. We find that co-training with both real and synthetic
+            data leads to improved motion quality and success rate on the one_leg task.</p>
+
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+
+
+      <!-- Concurrent Work. -->
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Related Links</h2>
+          <div class="content has-text-justified">
+            <p>
+              There's a lot of excellent work related to ours in the space of manipulation and assembly, reinforcement
+              learning, and diffusion models. Here are some notable examples:
+            </p>
+
+            <h3>Manipulation and Assembly</h3>
+            <ul>
+              <li><a target="_blank" href="https://clvrai.com/furniture-bench">FurnitureBench</a> introduces a
+                real-world furniture
+                assembly benchmark, providing a reproducible and easy-to-use platform for long-horizon complex robotic
+                manipulation that we use in our work.</li>
+              <li><a target="_blank" href="https://arxiv.org/abs/2309.16909">ASAP</a> is a physics-based planning
+                approach for
+                automatically generating sequences for general-shaped assemblies, accounting for gravity to design a
+                sequence where each sub-assembly is physically stable.</li>
+              <li><a target="_blank" href="https://ieeexplore.ieee.org/abstract/document/9645269">InsertionNet 1.0</a>
+                and <a href="https://ieeexplore.ieee.org/abstract/document/10016821">InsertionNet 2.0</a> address the
+                problem
+                of insertion specifically and propose regression-based methods that combine visual and force inputs to
+                solve various insertion tasks efficiently and robustly.</li>
+              <li><a target="_blank" href="https://ieeexplore.ieee.org/abstract/document/9561662">Grasping with
+                  Chopsticks</a> develops
+                an autonomous chopsticks-equipped robotic manipulator for picking up small objects, using approaches to
+                reduce covariate shift and improve generalization.</li>
+            </ul>
+
+            <h3>Diffusion Models and Reinforcement Learning</h3>
+            <p>
+              Recent work has explored combining diffusion models with reinforcement learning:
+            </p>
+            <ul>
+              <li><a target="_blank" href="http://rl-diffusion.github.io/">Black et al.</a> and <a
+                  href="https://arxiv.org/abs/2305.16381">Fan et al.</a> studied how to cast diffusion de-noising as a
+                Markov Decision Process, enabling preference-aligned image generation with policy gradient RL.</li>
+              <li><a target="_blank" href="https://arxiv.org/abs/2304.10573">IDQL</a> uses a Q-function to select the
+                best among
+                multiple diffusion model outputs.</li>
+              <li><a target="_blank" href="https://arxiv.org/abs/2206.00695">Goo et al.</a> explored advantage weighted
+                regression for
+                diffusion models.</li>
+              <li><a target="_blank" href="https://anuragajay.github.io/decision-diffuser/">Decision
+                  Diffuser</a> and related works
+                change the
+                objective into a supervised learning problem with return conditioning.</li>
+              <li><a target="_blank" href="https://arxiv.org/abs/2208.06193">Wang et al.</a> explored augmenting the
+                de-noising training
+                objective with a Q-function maximization objective.</li>
+            </ul>
+
+            <h3>Residual Learning in Robotics</h3>
+            <p>
+              Learning corrective residual components has seen widespread success in robotics:
+            </p>
+            <ul>
+              <li>Works like <a target="_blank" href="https://k-r-allen.github.io/residual-policy-learning/">Silver et
+                  al.</a>, <a target="_blank" href="https://arxiv.org/abs/2112.06749">Davchev et al.</a>, and others
+                have explored learning residual policies that correct for errors made by a nominal behavior policy.</li>
+              <li><a target="_blank" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8593995">Ajay et al.</a>
+                and <a target="_blank" href="https://journals.sagepub.com/doi/full/10.1177/0278364920954896">Kloss et
+                  al.</a> combined learned components to correct for inaccuracies in analytical models for physical
+                dynamics.</li>
+              <li><a target="_blank" href="https://industrial-insertion-rl.github.io/">Schoettler et al.</a> applied
+                residual policies to insertion tasks.</li>
+              <li><a target="_blank" href="https://transic-robot.github.io/"></a>TRANSIC by Jiang et al.</a> applied
+                residual policy learning to the FurnitureBench task suite, using the residual component to model online
+                human-provided corrections.</li>
+            </ul>
+
+            <h3>Theoretical Analysis of Imitation Learning</h3>
+            <p>
+              There's been an increasing amount of theoretical analysis of imitation learning, with recent works
+              focusing on the properties of noise injection and corrective actions:
+            </p>
+            <ul>
+              <li><a target="_blank" href="https://arxiv.org/abs/2307.14619">Provable Guarantees for Generative Behavior
+                  Cloning</a>
+                proposes a framework for generative behavior cloning, ensuring continuity through data augmentation and
+                noise injection.</li>
+              <li><a target="_blank" href="https://arxiv.org/abs/2310.12972">CCIL</a> generates corrective data using
+                local continuity
+                in environment dynamics.</li>
+              <li><a target="_blank" href="https://arxiv.org/abs/2205.14812">TaSIL</a> penalizes deviations in
+                higher-order Taylor
+                series terms between learned and expert policies.</li>
+            </ul>
+            <p>
+              These works aim to enhance the robustness and sample efficiency of imitation learning algorithms.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Concurrent Work. -->
+
+      <h2 class="title is-3">Future Directions</h2>
+
+      <div class="content has-text-justified">
+        <p>
+          Exciting future directions: Our method is base-model agnostic - we show it works with diffusion models, ACT,
+          and MLPs!
+        </p>
+        <p>
+          This means it could potentially scale to fine-tuning large multi-task behavior models (like Octo, OpenVLA,
+          etc.) while fully preserving their pre-training capabilities.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+
+  </div>
+  </section>
+
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@misc{ankile2026residualoffpolicy,
+        title={Residual Off-Policy RL for Finetuning Behavior Cloning Policies}, 
+        author={Lars Ankile and Anthony Simeonov and Idan Shenfeld and Marcel Torne and Pulkit Agrawal},
+        year={2026},
+        booktitle={IEEE International Conference on Robotics and Automation (ICRA)},
+        primaryClass={cs.RO},
+  }
+</code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a class="icon-link" href="#">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link" href="https://github.com/ankile" class="external-link" disabled>
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
