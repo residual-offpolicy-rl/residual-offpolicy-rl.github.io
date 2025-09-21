@@ -47,14 +47,17 @@
             More Research
           </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://imitation-juicer.github.io" target="_blank">
-              JUICER
+            <a class="navbar-item" href="https://residual-assembly.github.io/" target="_blank">
+              ResiP -- Residual Policy Finetuning with PPO
             </a>
-            <a class="navbar-item" href="https://diffusion-ppo.github.io/" target="_blank">
-              DPPO
+            <a class="navbar-item" href="https://diffusion-ppo.github.io" target="_blank">
+              DPPO -- Diffusion PPO
+            </a>
+            <a class="navbar-item" href="https://imitation-juicer.github.io" target="_blank">
+              JUICER -- Imitation Learning with Policy Diffusion
             </a>
             <a class="navbar-item" href="https://dexhub.ai/project" target="_blank">
-              Dexhub
+              Dexhub -- Scalable Teleoperation with Augmented Reality
             </a>
           </div>
         </div>
@@ -90,15 +93,13 @@
             </div>
 
             <div class="is-size-5 publication-authors">
-              <span class="author-block"><sup>1</sup>Massachusetts Institute of Technology</span>
-              <span class="author-block"><sup>2</sup>Improbable AI Lab</span>
-              <span class="author-block"><sup>3</sup>Harvard University</span>
+              <span class="author-block">Frontier AI in Robotics Lab, Amazon</span>
             </div>
 
             <div class="image-container">
-              <img src="./static/images/MIT_logo.png" alt="MIT Logo" width="12%" style="margin: 1em 0;">
+              <!-- <img src="./static/images/MIT_logo.png" alt="MIT Logo" width="12%" style="margin: 1em 0;">
               <img src="./static/images/Shield_CMYK.png" alt="Harvard Logo" width="7%" style="margin: 1em 0;">
-              <img src="./static/images/iai-logo-ver_1.jpg" alt="Improbable AI Logo" width="10%" style="margin: 1em 0;">
+              <img src="./static/images/iai-logo-ver_1.jpg" alt="Improbable AI Logo" width="10%" style="margin: 1em 0;"> -->
             </div>
 
             <div class="column has-text-centered">
@@ -157,15 +158,15 @@
   <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <video id="teaser" autoplay muted loop playsinline height="100%">
-          <!-- <source src="./static/videos/IROS_short.mp4" type="video/mp4"> -->
-          <source src="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/videos/website/1_main_video.m4v"
-            type="video/mp4">
-        </video>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/qnU58Crrczw?autoplay=1&mute=1&loop=1&playlist=qnU58Crrczw"
+            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+          </iframe>
+        </div>
         <h2 class="subtitle has-text-centered">
-          We present novel residual off-policy reinforcement learning methods that significantly improve sample
-          efficiency
-          and performance across various domains.
+          We present ResFiT, a residual RL method that performs real-world RL directly on our 29 Degree-of-Freedom (DoF)
+          wheeled humanoid platform with two 5-fingered-hands, demonstrating the first successful real-world RL training
+          on a humanoid robot with dexterous hands.
         </h2>
       </div>
     </div>
@@ -229,12 +230,15 @@
 
       <div class="content has-text-justified">
         <p>
-          Traditional off-policy reinforcement learning algorithms often struggle with sample efficiency and stability
-          when learning from experience replay buffers.
+          Modern BC architectures are typically deep models with tens of millions of parameters that use action chunking
+          or diffusion-based approaches, which can make it challenging to apply RL methods to directly optimize the
+          policy.
         </p>
         <p>
-          Our residual approach leverages the power of residual learning to correct and improve upon existing policies,
-          leading to more stable and efficient learning across diverse environments.
+          Our ResFiT approach leverages BC policies as black-box bases and learns lightweight per-step residual
+          corrections
+          via efficient off-policy RL, requiring only sparse binary reward signals and enabling real-world training on
+          high-DoF systems.
         </p>
       </div>
 
@@ -246,16 +250,17 @@
       <br><br><br>
 
 
-      <h2 class="title is-3">Introducing Residual Off-Policy RL</h2>
+      <h2 class="title is-3">Introducing ResFiT: Residual Fine-tuning with Off-Policy RL</h2>
 
       <div class="content has-text-justified">
         <p>
-          Our method introduces residual learning principles to off-policy reinforcement learning, enabling more stable
-          and efficient learning from experience replay buffers.
+          ResFiT is a two-phase approach using online RL to improve BC policies. It takes as input a pre-trained BC
+          policy
+          and learns lightweight per-step residual corrections via efficient off-policy RL.
         </p>
         <p>
-          The approach learns residual corrections to existing policies, allowing for incremental improvements while
-          maintaining the benefits of off-policy learning and sample efficiency.
+          The method leverages BC policies as black-box bases, avoiding the need to modify the complex BC architecture
+          while enabling real-world training on high-DoF systems with only sparse binary reward signals.
         </p>
       </div>
 
@@ -518,17 +523,17 @@
           <h3 class="title is-4">System Overview</h3>
 
           <div class="content has-text-justified">
-            <p>We present a novel approach to off-policy reinforcement learning that leverages residual learning
-              principles
-              to improve sample efficiency and stability. The method combines traditional off-policy algorithms with
-              residual corrections to address common challenges in experience replay-based learning.</p>
+            <p>We present ResFiT, a residual fine-tuning approach that combines the benefits of BC and RL through a
+              residual learning framework. Our approach leverages BC policies as black-box bases and learns lightweight
+              per-step residual corrections via efficient off-policy RL.</p>
 
-            <p>The approach involves learning a residual component that corrects and improves upon a base policy,
-              enabling more stable learning from off-policy data while maintaining the sample efficiency benefits
-              of experience replay.</p>
+            <p>The method addresses the challenge of applying RL to modern BC architectures (deep models with action
+              chunking or diffusion-based approaches) by learning only residual corrections rather than modifying
+              the entire policy.</p>
 
-            <p>This method addresses key challenges in off-policy RL, including distribution shift, sample efficiency,
-              and stability of learning from experience replay buffers.</p>
+            <p>This enables real-world RL training on high-DoF systems, requiring only sparse binary reward signals
+              and demonstrating the first successful real-world RL training on a humanoid robot with dexterous hands.
+            </p>
           </div>
           <div class="content has-text-centered is-full-width">
             <img src="./static/images/framework_overview.svg" alt="" style="width: 100%;">
@@ -536,46 +541,47 @@
 
           <p>
             <i>Fig. 1:</i>
-            <strong>(1)</strong> Starting with a base policy learned through standard off-policy RL,
-            <strong>(2)</strong> we train a residual component to correct and improve the base policy.
-            <strong>(3)</strong> The residual learning approach enables more stable learning from experience replay.
-            <strong>(4)</strong> The combined policy demonstrates improved sample efficiency and performance
-            <strong>(5)</strong> across diverse environments and tasks.
+            <strong>(1)</strong> Starting with a pre-trained BC policy,
+            <strong>(2)</strong> ResFiT learns lightweight per-step residual corrections via efficient off-policy RL.
+            <strong>(3)</strong> The residual learning approach enables real-world training on high-DoF systems.
+            <strong>(4)</strong> The method requires only sparse binary reward signals and demonstrates
+            <strong>(5)</strong> the first successful real-world RL training on a humanoid robot with dexterous hands.
           </p>
 
           <!-- Add some vertical space -->
           <br>
 
 
-          <h3 class="title is-4">Residual Off-Policy Learning</h3>
+          <h3 class="title is-4">ResFiT: Residual Fine-tuning with Off-Policy RL</h3>
 
           <div class="content has-text-justified">
             <p>
-              Traditional off-policy reinforcement learning algorithms often suffer from distribution shift and
-              instability
-              when learning from experience replay buffers. Our approach addresses these challenges through residual
-              learning.
+              ResFiT is a two-phase approach that avoids the challenges of directly applying RL to complex BC
+              architectures
+              by learning only residual corrections on top of a frozen BC policy.
             </p>
             <p>
-              The method learns residual corrections to improve upon a base policy:
+              The method leverages BC policies as black-box bases and learns lightweight per-step residual corrections:
             </p>
             <ul>
-              <li><strong>Base Policy:</strong> Learned through standard off-policy RL algorithms.</li>
-              <li><strong>Residual Component:</strong> Learns corrections to improve the base policy, trained with
-                residual learning objectives.</li>
+              <li><strong>Base Policy (BC):</strong> Pre-trained behavior cloning policy, kept frozen during RL
+                training.</li>
+              <li><strong>Residual Component:</strong> Learns per-step corrections via efficient off-policy RL,
+                requiring only sparse binary reward signals.</li>
             </ul>
 
 
-            <p>This approach combines the sample efficiency of off-policy learning with the stability of residual
-              corrections, enabling more robust learning from experience replay.</p>
+            <p>This approach enables real-world RL training on high-DoF systems while maintaining the benefits of
+              pre-trained BC policies and avoiding the need to modify complex BC architectures.</p>
           </div>
           <div class="content has-text-centered is-full-width">
             <img src="./static/images/ResidualDiffusionDiagram.svg" alt="" style="width: 40%;">
           </div>
 
           <p>
-            <i>Fig. 2:</i> Residual learning approach for off-policy reinforcement learning, where a residual component
-            learns to correct and improve upon a base policy learned from experience replay.
+            <i>Fig. 2:</i> Off-policy residual fine-tuning (ResFiT): A two-phase approach using online RL to improve BC
+            policies.
+            The method learns lightweight per-step residual corrections on top of a frozen BC policy.
           </p>
 
           <br><br>

@@ -30,7 +30,7 @@ body {
 
 .publication-title {
   font-size: 3em;
-  background: linear-gradient(to right, #00bfff, #ff00ff);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
   -webkit-background-clip: text;
   color: transparent;
 }
