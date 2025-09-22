@@ -305,6 +305,127 @@
         </div>
       </div>
 
+      <br><br><br>
+      <h2 class="title is-3">Package Handover Comparisons</h2>
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <div class="content has-text-justified is-full-width">
+            <p>Side-by-side comparison of base policy (left) vs. residual policy (right) performance on package handover
+              tasks.
+              The residual policy demonstrates improved success rates and more robust handling across different
+              scenarios.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content has-text-centered">
+        <div class="columns is-multiline">
+          <!-- Row 1 -->
+          <div class="column is-6">
+            <h4 class="title is-5">Base Policy</h4>
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/package_handover/res-success-base-fail-0-base_compressed_muted.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="column is-6">
+            <h4 class="title is-5">Residual Policy</h4>
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/package_handover/res-success-base-fail-0-res_compressed_muted.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="column is-6">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/package_handover/res-success-base-fail-1-base_compressed_muted.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="column is-6">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/package_handover/res-success-base-fail-1-res_compressed_muted.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="column is-6">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/package_handover/res-success-base-fail-2-base_compressed_muted.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="column is-6">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/package_handover/res-success-base-fail-2-res_compressed_muted.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <!-- Row 4 -->
+          <div class="column is-6">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/package_handover/res-success-base-fail-3-base_compressed_muted.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="column is-6">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/package_handover/res-success-base-fail-3-res_compressed_muted.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <!-- Row 5 -->
+          <div class="column is-6">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/package_handover/res-success-base-fail-4-base_compressed_muted.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="column is-6">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/package_handover/res-success-base-fail-4-res_compressed_muted.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <br><br><br>
+      <h2 class="title is-3">What Matters for Performance?</h2>
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <div class="content has-text-justified is-full-width">
+            <p>We find that in long-horizon tasks with sparse rewards, the Update-to-Data (UTD) ratio and using n-step
+              returns to be crucial.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content has-text-centered">
+        <img src="static/figures/success_rate_combined_utd_ablations.svg" alt="UTD ratio ablation study"
+          style="width: 100%; margin-bottom: 20px;">
+        <img src="static/figures/success_rate_combined_nstep_ablations.svg" alt="N-step returns ablation study"
+          style="width: 100%;">
+      </div>
+
 
     </div>
   </section>
@@ -330,6 +451,28 @@
               There's a lot of excellent work related to ours in the space of manipulation and assembly, reinforcement
               learning, and diffusion models. Here are some notable examples:
             </p>
+
+            <h3>Policy Learning and Fine-tuning</h3>
+            <ul>
+              <li><a target="_blank" href="https://arxiv.org/abs/2412.06685">Policy-Agnostic Reinforcement Learning</a>
+                introduces a universal method for fine-tuning various policy classes, including diffusion and
+                transformer-based policies, by decoupling policy improvement from specific policy architectures to
+                enhance sample efficiency in both offline and online RL settings.</li>
+              <li><a target="_blank" href="https://arxiv.org/abs/2007.04976">Policy Decorator</a> presents a modular
+                approach that allows a single policy to generalize across diverse agent morphologies, enabling control
+                over various agents with different skeletal structures through shared modular policies.</li>
+              <li><a target="_blank" href="https://arxiv.org/abs/2412.06685">EXPO: Expressive Policy Fine-tuning</a>
+                focuses on refining pre-trained policies by leveraging expressive models to adapt and improve
+                performance in new tasks or environments through efficient policy adaptation.</li>
+              <li><a target="_blank" href="https://arxiv.org/abs/2507.07969">Q-chunking</a> presents a simple yet
+                effective recipe for improving reinforcement learning algorithms for long-horizon, sparse-reward tasks
+                by applying action chunking to temporal difference-based RL methods, enabling agents to leverage
+                temporally consistent behaviors from offline data for more effective online exploration.</li>
+              <li><a target="_blank" href="https://arxiv.org/abs/2506.04168">Horizon Reduction Makes RL Scalable</a>
+                studies the scalability of offline reinforcement learning algorithms and introduces SHARSA, a minimal
+                yet scalable method that effectively reduces the horizon to unlock the scalability of offline RL on
+                challenging tasks.</li>
+            </ul>
 
             <h3>Manipulation and Assembly</h3>
             <ul>
