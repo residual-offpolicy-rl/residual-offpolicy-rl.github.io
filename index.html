@@ -27,7 +27,7 @@
 </head>
 
 <body>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
         <span aria-hidden="true"></span>
@@ -65,7 +65,7 @@
       </div>
 
     </div>
-  </nav>
+  </nav> -->
 
 
   <section class="hero">
@@ -95,9 +95,9 @@
             </div>
 
             <div class="is-size-5 publication-authors">
-              <span class="author-block"><sup>1</sup>Amazon FAR</span>
-              <span class="author-block"><sup>2</sup>Stanford University</span>
-              <span class="author-block"><sup>3</sup>Carnegie Mellon University</span>
+              <span class="author-block"><sup>1</sup>Amazon FAR (Frontier AI & Robotics)</span>&nbsp;&nbsp;
+              <span class="author-block"><sup>2</sup>Stanford University</span>&nbsp;&nbsp;
+              <span class="author-block"><sup>3</sup>Carnegie Mellon University</span>&nbsp;&nbsp;
               <span class="author-block"><sup>4</sup>UC Berkeley</span>
             </div>
 
@@ -170,7 +170,7 @@
         <br>
         <h2 class="subtitle has-text-centered">
           We present ResFiT, a residual RL method that performs real-world RL directly on our 29 Degree-of-Freedom (DoF)
-          wheeled humanoid platform with two 5-fingered-hands, demonstrating the first successful real-world RL training
+          wheeled humanoid platform with two 5-fingered-hands, demonstrating successful real-world RL training
           on a humanoid robot with dexterous hands.
         </h2>
       </div>
@@ -280,8 +280,21 @@
       <div class="content has-text-justified">
         <p>
           Our residual off-policy approach demonstrates substantial improvements in sample efficiency and final
-          performance
-          compared to standard off-policy algorithms across a variety of challenging environments.
+          performance compared to standard off-policy algorithms across a variety of challenging environments.
+        </p>
+
+        <p>
+          We compare our method to several strong baselines and ablations. First, we examine how off-policy residual RL
+          on top of an action-chunked base policy compares to directly performing off-policy RL to learn a single-action
+          policy from the same demonstrations. For this comparison, we use an optimized version of RLPD <a
+            href="https://arxiv.org/abs/2302.02948" target="_blank">[1]</a>
+          (state-of-the-art off-policy RL) called "Tuned RLPD" that incorporates the same design decisions as our method
+          but without the base policy. We also compare against IBRL <a href="https://arxiv.org/abs/2311.02198"
+            target="_blank">[2]</a>, which uses a pre-trained BC policy to propose
+          actions and bootstrap target values during RL training. Additionally, we include "Filtered BC," an online BC
+          fine-tuning baseline that starts with the same base policy but iteratively adds successful rollouts back into
+          the dataset for continued behavioral cloning rather than using residual RL. Finally, we ablate key design
+          choices including layer normalization, demo incorporation during online RL.
         </p>
       </div>
 
