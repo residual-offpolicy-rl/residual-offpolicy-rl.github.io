@@ -439,6 +439,157 @@
       </div>
 
 
+      <br><br><br>
+      <h2 class="title is-3">Comparison with Baseline in Simulation</h2>
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <div class="content has-text-justified is-full-width">
+            <p>Side-by-side comparison of BC policy (left) vs. Tuned RLPD (center) vs. ResFiT (right) performance on simulated tasks. Tuned RLPD shows much faster but very different behavior than the BC policy, and it fails on the coffee task. ResFiT improves performance over all tasks.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content has-text-centered">
+        <div class="columns is-multiline">
+          <!-- Row 1 -->
+          <div class="column is-4">
+            <h4 class="title is-5">BC Policy</h4>
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/simulation/coffee-bc_540p.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p>Success Rate: 77% <br> Average Number of Steps: 322</p>
+          </div>
+          <div class="column is-4">
+            <h4 class="title is-5">Tuned RLPD</h4>
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/simulation/coffee-rlpd_540p.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p>Success Rate: 0% <br> Average Number of Steps: N/A</p>
+          </div>
+          <div class="column is-4">
+            <h4 class="title is-5">ResFiT</h4>
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/simulation/coffee-res_540p.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p>Success Rate: 98% <br> Average Number of Steps: 141</p>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="column is-4">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/simulation/box-bc_540p.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p>Success Rate: 76% <br> Average Number of Steps: 231</p>
+          </div>
+          <div class="column is-4">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/simulation/box-rlpd_540p.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p>Success Rate: 98% <br> Average Number of Steps: 39</p>
+          </div>
+          <div class="column is-4">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/simulation/box-res_540p.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p>Success Rate: 97% <br> Average Number of Steps: 97</p>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="column is-4">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/simulation/cansort-bc_540p.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p>Success Rate: 89% <br> Average Number of Steps: 292</p>
+          </div>
+          <div class="column is-4">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/simulation/cansort-rlpd_540p.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p>Success Rate: 93% <br> Average Number of Steps: 27</p>
+          </div>
+          <div class="column is-4">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/simulation/cansort-res_540p.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p>Success Rate: 99% <br> Average Number of Steps: 166</p>
+          </div>
+
+          <!-- Row 4 -->
+          <div class="column is-4">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/simulation/square-bc_540p.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p>Success Rate: 76% <br> Average Number of Steps: 174</p>
+          </div>
+          <div class="column is-4">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/simulation/square-rlpd_540p.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p>Success Rate: 99% <br> Average Number of Steps: 39</p>
+          </div>
+          <div class="column is-4">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/simulation/square-res_540p.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p>Success Rate: 91% <br> Average Number of Steps: 121</p>
+          </div>
+
+          <!-- Row 5 -->
+          <div class="column is-4">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/simulation/can-bc_540p.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p>Success Rate: 78% <br> Average Number of Steps: 160</p>
+          </div>
+          <div class="column is-4">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/simulation/can-rlpd_540p.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p>Success Rate: 97% <br> Average Number of Steps: 41</p>
+          </div>
+          <div class="column is-4">
+            <video autoplay loop muted loading="lazy" preload="none" style="width: 100%; border-radius: 10px;">
+              <source src="static/videos/simulation/can-res_540p.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p>Success Rate: 99% <br> Average Number of Steps: 110</p>
+          </div>
+
+        </div>
+      </div>
+
+
     </div>
   </section>
 
