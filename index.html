@@ -837,8 +837,8 @@
           <h2 class="title is-3">Related Links</h2>
           <div class="content has-text-justified">
             <p>
-              There's a lot of excellent work related to ours in the space of manipulation and assembly, reinforcement
-              learning, and diffusion models. Here are some notable examples:
+              There's a lot of excellent work related to ours in the space of manipulation, reinforcement
+              learning, and BC models. Here are some notable examples:
             </p>
 
             <h3>Policy Learning and Fine-tuning</h3>
@@ -863,32 +863,17 @@
                 challenging tasks.</li>
             </ul>
 
-            <h3>Manipulation and Assembly</h3>
-            <ul>
-              <li><a target="_blank" href="https://clvrai.com/furniture-bench">FurnitureBench</a> introduces a
-                real-world furniture
-                assembly benchmark, providing a reproducible and easy-to-use platform for long-horizon complex robotic
-                manipulation that we use in our work.</li>
-              <li><a target="_blank" href="https://arxiv.org/abs/2309.16909">ASAP</a> is a physics-based planning
-                approach for
-                automatically generating sequences for general-shaped assemblies, accounting for gravity to design a
-                sequence where each sub-assembly is physically stable.</li>
-              <li><a target="_blank" href="https://ieeexplore.ieee.org/abstract/document/9645269">InsertionNet 1.0</a>
-                and <a href="https://ieeexplore.ieee.org/abstract/document/10016821">InsertionNet 2.0</a> address the
-                problem
-                of insertion specifically and propose regression-based methods that combine visual and force inputs to
-                solve various insertion tasks efficiently and robustly.</li>
-              <li><a target="_blank" href="https://ieeexplore.ieee.org/abstract/document/9561662">Grasping with
-                  Chopsticks</a> develops
-                an autonomous chopsticks-equipped robotic manipulator for picking up small objects, using approaches to
-                reduce covariate shift and improve generalization.</li>
-            </ul>
-
             <h3>Diffusion Models and Reinforcement Learning</h3>
             <p>
               Recent work has explored combining diffusion models with reinforcement learning:
             </p>
             <ul>
+              <li><a target="_blank" href="https://arxiv.org/abs/2409.00588">DPPO</a> introduces Diffusion Policy Policy
+                Optimization, an algorithmic framework for fine-tuning diffusion-based policies using policy gradient
+                methods.</li>
+              <li><a target="_blank" href="https://arxiv.org/abs/2507.21053">FPO</a> presents Flow Policy Optimization,
+                a policy gradient algorithm that brings flow matching into the policy gradient framework for training
+                flow-based generative policies from scratch.</li>
               <li><a target="_blank" href="http://rl-diffusion.github.io/">Black et al.</a> and <a
                   href="https://arxiv.org/abs/2305.16381">Fan et al.</a> studied how to cast diffusion de-noising as a
                 Markov Decision Process, enabling preference-aligned image generation with policy gradient RL.</li>
@@ -912,6 +897,9 @@
               Learning corrective residual components has seen widespread success in robotics:
             </p>
             <ul>
+              <li><a target="_blank" href="https://arxiv.org/abs/2407.16677">ResiP</a> enhances behavior
+                cloning policies by training residual policies with reinforcement learning for high-precision assembly
+                tasks.</li>
               <li>Works like <a target="_blank" href="https://k-r-allen.github.io/residual-policy-learning/">Silver et
                   al.</a>, <a target="_blank" href="https://arxiv.org/abs/2112.06749">Davchev et al.</a>, and others
                 have explored learning residual policies that correct for errors made by a nominal behavior policy.</li>
@@ -979,13 +967,13 @@
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
-      <pre><code>@misc{ankile2025residualoffpolicy,
+      <!-- <pre><code>@misc{ankile2025residualoffpolicy,
         title={Residual Off-Policy RL for Finetuning Behavior Cloning Policies}, 
         author={Lars Ankile and Zhenyu Jiang and Rocky Duan and Guanya Shi and Pieter Abbeel and Anusha Nagabandi},
         year={2026},
         primaryClass={cs.RO}
-  }
-</code></pre>
+  } -->
+      </code></pre>
     </div>
   </section>
 
@@ -1002,8 +990,9 @@
           <div class="content">
             <p>
               This website template is adapted from <a
-                href="https://github.com/residual-assembly/residual-assembly.github.io">Residual Assembly</a>, which was
-              adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+                href="https://github.com/residual-assembly/residual-assembly.github.io" target="_blank">Residual
+                Assembly</a>, which was
+              adapted from <a href="https://github.com/nerfies/nerfies.github.io" target="_blank">Nerfies</a>.
             </p>
           </div>
         </div>
