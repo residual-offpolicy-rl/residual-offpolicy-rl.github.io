@@ -228,6 +228,10 @@
       </div>
 
       <img src="static/figures/success_rate_combined.svg" alt="Success rate comparison" style="width: 100%;">
+      <p class="has-text-grey-light" style="font-size: 0.9em; margin-top: 10px; text-align: center;">
+        Performance comparison across simulation tasks showing ResFiT's improvements over baseline methods including
+        Tuned RLPD, IBRL, and Filtered BC.
+      </p>
 
 
 
@@ -259,6 +263,10 @@
             style="display: flex; align-items: center; justify-content: center; height: 100%;">
             <img src="static/figures/td3_vs_ppo_boxclean.svg" alt="Off-policy vs On-policy comparison on BoxClean task"
               style="width: 100%; max-width: 100%;">
+            <p class="has-text-grey-light" style="font-size: 0.9em; margin-top: 10px; text-align: center;">
+              Off-policy TD3 converges in 200k steps vs. on-policy PPO requiring 40M steps—a 200× improvement in sample
+              efficiency.
+            </p>
           </div>
         </div>
       </div>
@@ -297,9 +305,9 @@
               from a head-mounted Zed camera, with a 29-dimensional action space using absolute joint position control.
             </p>
             <p><strong>Tasks:</strong> We evaluate on two challenging manipulation tasks. In
-              <strong>WoollyBallPnP</strong>,
+              <code>WoollyBallPnP</code>,
               the right hand picks up a ball from a random table location and places it into a randomly positioned tote.
-              In <strong>PackageHandover</strong>, the right hand picks up a deformable package, hands it to the left
+              In <code>PackageHandover</code>, the right hand picks up a deformable package, hands it to the left
               hand,
               and places it into a tote on the left side of the workspace.
             </p>
@@ -433,7 +441,7 @@
       </div>
 
       <br><br><br>
-      <h2 class="title is-3"><code>WoollyBall</code> Comparisons</h2>
+      <h2 class="title is-3"><code>WoollyBallPnP</code> Comparisons</h2>
 
       <div class="columns is-centered">
         <div class="column is-full-width">
@@ -594,9 +602,49 @@
 
       <div class="content has-text-centered">
         <img src="static/figures/success_rate_combined_utd_ablations.svg" alt="UTD ratio ablation study"
-          style="width: 100%; margin-bottom: 20px;">
+          style="width: 100%; margin-bottom: 10px;">
+        <p class="has-text-grey-light" style="font-size: 0.9em; margin-top: 10px;">
+          UTD ratio ablation showing optimal performance at UTD=4, with diminishing returns at higher values.
+        </p>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <div class="content has-text-justified is-full-width">
+            <p>
+              For <strong>UTD ratios</strong>, we observe that for tasks with horizon lengths of 150-250 steps (such as
+              BoxCleanup),
+              UTD values greater than 1 provide clear benefits, but gains plateau at moderate values. Learning is
+              noticeably
+              slower for a UTD of ½, but increasing to very high UTDs of 8 or higher yields diminishing returns, with
+              UTDs
+              of 4 already capturing most of the benefit while remaining stable.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content has-text-centered">
         <img src="static/figures/success_rate_combined_nstep_ablations.svg" alt="N-step returns ablation study"
-          style="width: 100%;">
+          style="width: 100%; margin-bottom: 10px;">
+        <p class="has-text-grey-light" style="font-size: 0.9em; margin-top: 10px;">
+          N-step returns ablation demonstrating the importance of multi-step returns for sparse reward tasks, with
+          optimal performance around n=5.
+        </p>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <div class="content has-text-justified is-full-width">
+            <p>
+              For <strong>n-step returns</strong>, we see the importance of using values larger than 1 for sparse reward
+              tasks.
+              However, since larger n-step values also increase bias, excessively large values can negatively affect
+              performance,
+              requiring a careful balance between reducing variance and controlling bias.
+            </p>
+          </div>
+        </div>
       </div>
 
 
@@ -907,12 +955,15 @@
 
       <div class="content has-text-justified">
         <p>
-          Exciting future directions: Our method is base-model agnostic - we show it works with diffusion models, ACT,
-          and MLPs!
+          Looking ahead, figuring out the right way to relax the frozen base constraint without sacrificing stability
+          could provide further improvement in performance and robustness. If we can distill the more precise, reliable,
+          and fast behavior from the combined policy back into the base policy, that would provide more room for the
+          residual model to improve further.
         </p>
         <p>
-          This means it could potentially scale to fine-tuning large multi-task behavior models (like Octo, OpenVLA,
-          etc.) while fully preserving their pre-training capabilities.
+          This would be particularly powerful in the multitask setting, where one can distill task-specific residual
+          improvements into an increasingly capable generalist. Our method is base-model agnostic and could potentially
+          scale to fine-tuning large multi-task behavior models while fully preserving their pre-training capabilities.
         </p>
       </div>
 
