@@ -201,3 +201,8 @@ body {
   object-fit: cover; /* Crop video to fill container */
   transform: translate(-50%, -50%);
 }
+
+/* Show more of the left side by adjusting object position */
+.shift-right video {
+  object-position: 10% center; /* Show more of the left side of the video content */
+}
