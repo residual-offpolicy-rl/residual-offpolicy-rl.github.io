@@ -27,46 +27,6 @@
 </head>
 
 <body>
-  <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-    <div class="navbar-menu">
-      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-        <a class="navbar-item" href="https://ankile.com" target="_blank">
-          <span class="icon">
-            <i class="fas fa-home"></i>
-          </span>
-        </a>
-
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            More Research
-          </a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://residual-assembly.github.io/" target="_blank">
-              ResiP -- Residual Policy Finetuning with PPO
-            </a>
-            <a class="navbar-item" href="https://diffusion-ppo.github.io" target="_blank">
-              DPPO -- Diffusion PPO
-            </a>
-            <a class="navbar-item" href="https://imitation-juicer.github.io" target="_blank">
-              JUICER -- Imitation Learning with Policy Diffusion
-            </a>
-            <a class="navbar-item" href="https://dexhub.ai/project" target="_blank">
-              Dexhub -- Scalable Teleoperation with Augmented Reality
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </nav> -->
-
 
   <section class="hero">
     <div class="hero-body">
@@ -106,11 +66,6 @@
               <span class="author-block"><sup>†</sup>Work done while at Amazon FAR</span>
             </div>
 
-            <div class="image-container">
-              <!-- <img src="./static/images/MIT_logo.png" alt="MIT Logo" width="12%" style="margin: 1em 0;">
-              <img src="./static/images/Shield_CMYK.png" alt="Harvard Logo" width="7%" style="margin: 1em 0;">
-              <img src="./static/images/iai-logo-ver_1.jpg" alt="Improbable AI Logo" width="10%" style="margin: 1em 0;"> -->
-            </div>
 
             <div class="column has-text-centered">
               <div class="publication-links">
@@ -123,17 +78,7 @@
                     <span>Paper (Coming Soon)</span>
                   </a>
                 </span>
-                <!-- Video Link. -->
-                <!-- <span class="link-block">
-                  <a target="_blank" href="https://youtu.be/AsasJJ2jlw8"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                    </span>
-                    <span>3-Minute Video</span>
-                  </a>
-                </span> -->
-                <!-- Code Link. -->
+                &nbsp;&nbsp;&nbsp;&nbsp;
                 <span class="link-block">
                   <a target="_blank" href="" class="external-link button is-normal is-rounded is-dark" disabled>
                     <span class="icon">
@@ -142,16 +87,6 @@
                     <span>Code (Coming Soon)</span>
                   </a>
                 </span>
-                <!-- Dataset Link. -->
-                <!-- <span class="link-block">
-                  <a href="https://iai-robust-rearrangement.s3.us-east-2.amazonaws.com/index.html"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="far fa-images"></i>
-                    </span>
-                    <span>Data</span>
-                  </a>
-                </span> -->
               </div>
 
             </div>
@@ -295,6 +230,39 @@
       <img src="static/figures/success_rate_combined.svg" alt="Success rate comparison" style="width: 100%;">
 
 
+
+
+
+      <br><br><br>
+      <h2 class="title is-3">Off-Policy vs On-Policy Residual RL</h2>
+
+      <div class="columns is-centered is-vcentered">
+        <div class="column is-half">
+          <div class="content has-text-justified"
+            style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+            <div>
+              <p>
+                On the simulated <strong>BoxClean</strong> task, we compare our off-policy residual RL approach to
+                performing residual RL with the on-policy PPO algorithm, as done in the ResiP algorithm <a
+                  href="https://arxiv.org/pdf/2407.16677" target="_blank">[3]</a>.
+              </p>
+              <p>
+                Our approach converges at 200k steps versus 40M steps, demonstrating a <strong>200× boost in sample
+                  efficiency</strong>. This improvement highlights the need for off-policy approaches when performing
+                RL directly in the real world.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="column is-half">
+          <div class="content has-text-centered"
+            style="display: flex; align-items: center; justify-content: center; height: 100%;">
+            <img src="static/figures/td3_vs_ppo_boxclean.svg" alt="Off-policy vs On-policy comparison on BoxClean task"
+              style="width: 100%; max-width: 100%;">
+          </div>
+        </div>
+      </div>
+
       <br><br><br>
       <h2 class="title is-3">Real-World RL Fine-Tuning using ResFiT</h2>
 
@@ -318,7 +286,7 @@
       </div>
 
       <br><br><br>
-      <h2 class="title is-3">Package Handover Comparisons</h2>
+      <h2 class="title is-3"><code>PackageHandover</code> Comparisons</h2>
 
       <div class="columns is-centered">
         <div class="column is-full-width">
@@ -429,7 +397,7 @@
       </div>
 
       <br><br><br>
-      <h2 class="title is-3">Woolly Ball Task Comparisons</h2>
+      <h2 class="title is-3"><code>WoollyBall</code> Comparisons</h2>
 
       <div class="columns is-centered">
         <div class="column is-full-width">
