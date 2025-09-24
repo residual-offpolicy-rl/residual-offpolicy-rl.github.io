@@ -286,6 +286,42 @@
       </div>
 
       <br><br><br>
+      <h2 class="title is-3">Real-World Task Results</h2>
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <div class="content has-text-justified is-full-width">
+            <p>We demonstrate ResFiT on a real-world bimanual dexterous manipulation platform - the wheeled Vega
+              humanoid
+              from Dexmate. The robot features two 7-DoF arms, two 6-DoF OyMotion dexterous hands, and 2 image streams
+              from a head-mounted Zed camera, with a 29-dimensional action space using absolute joint position control.
+            </p>
+            <p><strong>Tasks:</strong> We evaluate on two challenging manipulation tasks. In
+              <strong>WoollyBallPnP</strong>,
+              the right hand picks up a ball from a random table location and places it into a randomly positioned tote.
+              In <strong>PackageHandover</strong>, the right hand picks up a deformable package, hands it to the left
+              hand,
+              and places it into a tote on the left side of the workspace.
+            </p>
+            <p><strong>Evaluation:</strong> To ensure fair comparison, we use blind A/B testing with matched initial
+              conditions. For each round, we sample random scene configurations, randomly assign policies to labels A
+              and B,
+              execute both policies from identical states, and reveal identities only after completion. This mitigates
+              evaluator bias and environmental confounds common in real-world robot evaluations.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content has-text-centered">
+        <img src="static/figures/real_world_result.png" alt="Real-world task success rates comparison"
+          style="max-width: 100%; height: auto;">
+        <p class="has-text-grey-light" style="font-size: 0.9em; margin-top: 10px;">
+          Success rates on real-world tasks comparing BC with ACT baseline vs. ResFiT residual policy.
+        </p>
+      </div>
+
+      <br><br><br>
       <h2 class="title is-3"><code>PackageHandover</code> Comparisons</h2>
 
       <div class="columns is-centered">
